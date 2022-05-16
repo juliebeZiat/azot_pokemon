@@ -1,6 +1,6 @@
 const PokemonCard = () => (
   <div>
-    Détails
+    Card
   </div>
 );
 
