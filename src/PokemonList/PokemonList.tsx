@@ -1,26 +1,28 @@
-import PokemonCard from "../PokemonCard/PokemonCard";
-import PropTypes from 'prop-types';
-import { Results } from '../utils/interface';
+import { Link } from 'react-router-dom';
+import { Pokemons } from '../utils/interface';
 
-const PokemonList = ({ results }: Results) => (
-  <div>
-    <ul>
-      {results.map((poke) => (
-        <li key={poke.name}>{poke.name}</li>
-      ))}
+interface Props {
+  pokemons: Pokemons;
+  setPokemonDetails: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const PokemonList = ({ pokemons, setPokemonDetails }: Props) => {
+  return (
+    <div>
+      <ul>
+        {pokemons.results.map((poke) => (
+          <li key={poke.name}>
+            <Link
+              to={`/${poke.name}`}
+              onClick={() => setPokemonDetails(poke.name)}
+            >
+              {poke.name}
+            </Link>
+          </li>
+        ))}
       </ul>
-    <PokemonCard />
-  </div>
-);
-
-
-PokemonList.propTypes = {
-  pokemons: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string,
-      url: PropTypes.string,
-    }),
-  ),
+    </div>
+  );
 };
 
 export default PokemonList;

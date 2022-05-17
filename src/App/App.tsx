@@ -1,25 +1,40 @@
 import PokemonList from '../PokemonList/PokemonList';
 import './App.css';
-import { fetchPokemons } from '../utils/api';
+import { fetchPokemons, fetchPokemon } from '../utils/api';
+import { Route, Routes } from 'react-router-dom';
+import PokemonCard from '../PokemonCard/PokemonCard';
+import { useState } from 'react';
 
 function App() {
-  const pokemonQuery = fetchPokemons();
+  const [ pokemonDetails, setPokemonDetails ] = useState<string>('');
 
-  if (pokemonQuery.isLoading || pokemonQuery.isIdle) {
+  const pokemonsQuery = fetchPokemons();
+  const pokemonQuery = fetchPokemon(pokemonDetails);
+  
+  if (pokemonsQuery.isLoading || pokemonsQuery.isIdle || pokemonQuery.isLoading || pokemonQuery.isIdle) {
     return <h1>Chargement...</h1>;
   }
 
-  if (pokemonQuery.error) {
-    return <p>{pokemonQuery.error.message}</p>
+  if (pokemonsQuery.error || pokemonQuery.error) {
+    if (pokemonsQuery.error) {
+      return <p>{pokemonsQuery.error.message}</p>
+    }
+    if (pokemonQuery.error) {
+      return <p>{pokemonQuery.error.message}</p>
+    }
   }
 
-  // Récuperation du tableau results pour le passer en props
-  const pokemons = pokemonQuery.data.results;
-  
+  const pokemons = pokemonsQuery.data;
+  const pokemon = pokemonQuery.data;
+  console.log(pokemons);
+
   return (
     <div className="App">
       <h1>Pokedex</h1>
-      <PokemonList results={pokemons}/>
+      <Routes>
+        <Route path="/" element={<PokemonList pokemons={pokemons} setPokemonDetails={setPokemonDetails} />} />
+        <Route path="/:pokeName" element={<PokemonCard pokemon={pokemon} />} />
+      </Routes>
     </div>
   );
 }
