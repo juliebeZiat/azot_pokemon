@@ -4,15 +4,16 @@ import { fetchPokemons, fetchPokemon } from '../utils/api';
 import { Route, Routes } from 'react-router-dom';
 import PokemonCard from '../PokemonCard/PokemonCard';
 import { useState } from 'react';
+import Spinner from '../Spinner/Spinner';
 
 function App() {
-  const [ pokemonDetails, setPokemonDetails ] = useState<string>('');
+  const [pokemonDetails, setPokemonDetails] = useState<string>('');
 
   const pokemonsQuery = fetchPokemons();
   const pokemonQuery = fetchPokemon(pokemonDetails);
-  
+
   if (pokemonsQuery.isLoading || pokemonsQuery.isIdle || pokemonQuery.isLoading || pokemonQuery.isIdle) {
-    return <h1>Chargement...</h1>;
+    return <Spinner />;
   }
 
   if (pokemonsQuery.error || pokemonQuery.error) {
@@ -26,11 +27,9 @@ function App() {
 
   const pokemons = pokemonsQuery.data;
   const pokemon = pokemonQuery.data;
-  console.log(pokemons);
 
   return (
-    <div className="App">
-      <h1>Pokedex</h1>
+    <div className="App font-sans m-10">
       <Routes>
         <Route path="/" element={<PokemonList pokemons={pokemons} setPokemonDetails={setPokemonDetails} />} />
         <Route path="/:pokeName" element={<PokemonCard pokemon={pokemon} />} />

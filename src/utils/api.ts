@@ -3,7 +3,7 @@ import { useQuery, UseQueryResult } from 'react-query';
 
 export function fetchPokemons(): UseQueryResult<Pokemons, Error> {
   return useQuery('pokemons', async () => {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon');
+    const response = await fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=100');
     return await response.json();
   });
 }
