@@ -1,3 +1,4 @@
+// List of pokemons
 export interface Pokemons {
   results: [
     {
@@ -6,6 +7,7 @@ export interface Pokemons {
   ]
 }
 
+// Data of a specific pokemon
 export interface Pokemon {
   id: number;
   name: string,

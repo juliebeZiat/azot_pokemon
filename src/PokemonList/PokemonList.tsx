@@ -6,6 +6,7 @@ interface Props {
   setPokemonDetails: React.Dispatch<React.SetStateAction<string>>;
 }
 
+// => Display list of all pokemons
 const PokemonList = ({ pokemons, setPokemonDetails }: Props) => {
   return (
     <div>
@@ -17,7 +18,7 @@ const PokemonList = ({ pokemons, setPokemonDetails }: Props) => {
             onClick={() => setPokemonDetails(poke.name)}
           >
             <li key={poke.name} className="bg-red p-8 m-2 text-2xl cursor-pointer text-white">
-                {(poke.name).toUpperCase()}
+              {(poke.name).toUpperCase()}
             </li>
           </Link>
         ))}
