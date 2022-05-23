@@ -4,7 +4,7 @@ import reportWebVitals from './reportWebVitals';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { BrowserRouter } from 'react-router-dom';
-import App from './App/App';
+import App from './components/App/App';
 import './index.css';
 
 const root = ReactDOM.createRoot(

@@ -1,10 +1,6 @@
 // List of pokemons
-export interface Pokemons {
-  results: [
-    {
-      name: string,
-    }
-  ]
+export interface IPokemonsList {
+  results: {name: string}[];
 }
 
 // Data of a specific pokemon
